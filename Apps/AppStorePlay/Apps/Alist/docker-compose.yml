@@ -1,0 +1,53 @@
+name: alist
+services:
+  alist:
+    image: xhofe/alist:latest
+    container_name: alist
+    deploy:
+      resources:
+        reservations:
+          memory: "64M"
+    network_mode: bridge
+    ports:
+      - target: 5244
+        published: "5244"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/alist/data
+        target: /opt/alist/data
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm
+    - arm64
+  author: Cp0204
+  category: Cloud
+  description:
+    en_us: A file list program that supports multiple storage, powered by Gin and Solidjs.
+    zh_cn: 一个支持多种存储的文件列表程序，使用 Gin 和 Solidjs。
+  developer: Xhofe
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Alist/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Alist/screenshot-1.png
+  main: alist
+  port_map: "5244"
+  scheme: http
+  tagline:
+    en_us: A file list program that supports multiple storage
+    zh_cn: 一个支持多种存储的文件列表程序
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/Alist/thumbnail.png
+  tips:
+    before_install:
+      en_us: |
+        **Note: The open source project Alist has been found to have been sold out to a commercial company in June 2025 and has been suspected of collecting private information, so please use with caution.**
+
+        After installation, view the initial password in the log.
+      zh_cn: |
+        **注意：开源项目Alist已于2025年6月被发现出卖给某商业公司，并有涉嫌收集隐私信息的行为，请谨慎使用。**
+
+        安装完成后，请在日志中查看初始密码。
+  title:
+    en_us: Alist

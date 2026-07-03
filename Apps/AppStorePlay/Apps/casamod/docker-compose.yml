@@ -1,0 +1,65 @@
+version: "3.8"
+name: casamod
+services:
+  casamod:
+    #build: .
+    container_name: casamod
+    image: cp0204/casamod:latest
+    volumes:
+      - /DATA/AppData/casamod:/DATA/AppData/casamod
+      - /var/lib/casaos/www:/var/lib/casaos/www
+    pid: host
+    privileged: true
+    network_mode: bridge
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          memory: 8M
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm
+    - arm64
+  main: casamod
+  store_app_id: casamod
+  category: Developer
+  author: Cp0204
+  developer: Cp0204
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/casamod/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/casamod/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/casamod/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/casamod/screenshot-3.png
+  # thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/casamod/thumbnail.png
+  description:
+    en_us: Add MODs like a game, and elegantly make some fancy modifications to the CasaOS frontend. Examples include mouse effects, animated wallpapers, modified themes, and more.
+    zh_cn: 像游戏一样打 MOD （模组），优雅地为 CasaOS 前端做一些花里胡哨的修改。例如鼠标特效、动态背景、修改主题，等等。
+  tagline:
+    en_us: MOD for CasaOS, Make your CasaOS unique
+    zh_cn: 给 CasaOS 打 MOD ，让你的 CasaOS 独一无二
+  title:
+    en_us: CasaMOD
+  tips:
+    before_install:
+      en_us: |
+        1. Install CasaMOD
+        2. Put the MOD directory you want to enable into the `/DATA/AppData/casamod/mod` directory.
+        3. Restart CasaMOD and finish!
+
+        You can find new MOD, and contribute your MOD [here](https://github.com/Cp0204/CasaMOD). 😉
+
+        > Also, after installation you can access the icons in the `/DATA/AppData/casamod/icon` directory with `/icon/xx.png`.
+      zh_cn: |
+        1. 安装 CasaMOD
+        2. 把要启用的MOD目录放到 `/DATA/AppData/casamod/mod` 目录
+        3. 重启 CasaMOD ，完成！
+
+        你可以在[这里](https://github.com/Cp0204/CasaMOD/blob/main/README_CN.md)查找新MOD，和贡献你的MOD。 😉
+
+        > 另外，安装后你可以用 `/icon/xx.png` 访问到 `/DATA/AppData/casamod/icon` 目录中的图标。
+  scheme: https
+  hostname: github.com
+  port_map: ''
+  index: /Cp0204/CasaMOD

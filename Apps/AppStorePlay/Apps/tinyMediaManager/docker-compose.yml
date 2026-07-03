@@ -1,0 +1,50 @@
+name: tinymediamanager
+services:
+  tinymediamanager:
+    image: tinymediamanager/tinymediamanager:latest
+    container_name: tinymediamanager
+    deploy:
+      resources:
+        reservations:
+          memory: "1024M"
+    network_mode: bridge
+    environment:
+      - USER_ID=1000
+      - GROUP_ID=1000
+      - ALLOW_DIRECT_VNC=true
+      - LC_ALL=en_US.UTF-8 # force UTF8
+      - LANG=en_US.UTF-8   # force UTF8
+      - PASSWORD=admin
+    ports:
+      - 5900:5900 # VNC port
+      - 4000:4000 # Webinterface
+    restart: unless-stopped
+    volumes:
+      - /DATA/AppData/tinymediamanager/data:/data
+      - /DATA/Media:/DATA/Media
+      - /media:/media
+      - /mnt:/mnt
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  author: Cp0204
+  category: Media
+  description:
+    en_us: tinyMediaManager is a media management tool written in Java/Swing. It is designed to provide a simple and intuitive interface for organizing and managing your media collection.
+    zh_cn: tinyMediaManager 是一个用 Java/Swing 编写的媒体管理工具。它旨在为您的媒体收藏提供简单直观的界面，方便组织和管理。
+  developer: tinyMediaManager
+  main: tinymediamanager
+  tagline:
+    en_us: Media management tool
+    zh_cn: 媒体管理工具
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/tinyMediaManager/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/tinyMediaManager/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/tinyMediaManager/screenshot-2.png
+  tips:
+  title:
+    en_us: tinyMediaManager
+  port_map: "4000"
+  scheme: http

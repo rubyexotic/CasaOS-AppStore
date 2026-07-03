@@ -1,0 +1,78 @@
+name: bilibilitoolpro
+services:
+  bilibilitoolpro:
+    environment:
+      Ray_DailyTaskConfig__AutoChargeUpId: "-1"
+      Ray_DailyTaskConfig__Cron: 0 15 * * *
+      Ray_LiveLotteryTaskConfig__Cron: 0 22 * * *
+      Ray_UnfollowBatchedTaskConfig__Cron: 0 6 1 * *
+      Ray_VipBigPointConfig__Cron: 7 1 * * *
+    image: ghcr.io/raywangqvq/bilibili_tool_pro:latest
+    container_name: bilibilitoolpro
+    network_mode: bridge
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/bilibilitoolpro/cookies.json
+        target: /app/cookies.json
+      - type: bind
+        source: /DATA/AppData/bilibilitoolpro/Logs
+        target: /app/Logs
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  author: Cp0204
+  category: WEB
+  description:
+    en_us: BiliBiliTool is a tool that automatically performs tasks. When we forget to do a certain task, it is like a caring assistant that follows the commands we have given it in advance, helping us complete the planned tasks within the specified frequency and time range.
+    zh_cn: BiliBiliTool 是一个自动执行任务的工具，当我们忘记做某项任务时，它会像一个贴心小助手，按照我们预先吩咐它的命令，在指定频率、时间范围内帮助我们完成计划的任务。
+  developer: raywangqvq
+  icon: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/BiliBiliToolPro/icon.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/BiliBiliToolPro/screenshot-1.png
+  tagline:
+    en_us: Automated tool for performing BiliBili tasks.
+    zh_cn: 自动执行 BiliBi 任务的工具
+  thumbnail: https://cdn.jsdelivr.net/gh/Cp0204/CasaOS-AppStore-Play@main/Apps/BiliBiliToolPro/thumbnail.png
+  tips:
+    before_install:
+      en_us: |
+        Steps
+
+        1. Create a `cookies.json` file before installing, and run it on the host machine
+
+        `mkdir -p /DATA/AppData/bilibilitoolpro ; wget -O /DATA/AppData/bilibilitoolpro/cookies.json https://gcore.jsdelivr.net/gh/RayWangQvQ/BiliBiliToolPro@main/docker/sample/cookies.json ; chmod 666 /DATA/AppData/bilibilitoolpro/cookies.json`.
+
+
+        2. After installing and scanning the code to log in, run
+
+        `docker exec -it bilibilitoolpro bash -c "dotnet Ray.BiliBiliTool.Console.dll --runTasks=Login"`
+
+        Or run in the container terminal (recommended)
+
+        `dotnet Ray.BiliBiliTool.Console.dll --runTasks=Login`
+
+
+        [Documentation](https://github.com/RayWangQvQ/BiliBiliToolPro/blob/main/docker/README.md)
+      zh_cn: |
+        使用步骤
+
+        1. 安装前建立**cookies.json**文件，在宿主机运行
+
+        `mkdir -p /DATA/AppData/bilibilitoolpro ; wget -O /DATA/AppData/bilibilitoolpro/cookies.json https://gcore.jsdelivr.net/gh/RayWangQvQ/BiliBiliToolPro@main/docker/sample/cookies.json ; chmod 666 /DATA/AppData/bilibilitoolpro/cookies.json`
+
+
+        2. 安装完成后**扫码登录**，在宿主机运行
+
+        `docker exec -it bilibilitoolpro bash -c "dotnet Ray.BiliBiliTool.Console.dll --runTasks=Login"`
+
+        或容器终端中运行（推荐）
+
+        `dotnet Ray.BiliBiliTool.Console.dll --runTasks=Login`
+
+
+        [项目文档](https://github.com/RayWangQvQ/BiliBiliToolPro/blob/main/docker/README.md)
+  main: bilibilitoolpro
+  title:
+    en_us: BiliBiliToolPro
